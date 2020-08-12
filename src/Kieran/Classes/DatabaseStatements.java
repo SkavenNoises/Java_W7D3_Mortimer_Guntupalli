@@ -78,4 +78,8 @@ public class DatabaseStatements {
 
 		System.out.println("\n");
 	}
+
+	public void closeConnection() throws SQLException {
+		this.databaseConnection.closeConnection();
+	}
 }
