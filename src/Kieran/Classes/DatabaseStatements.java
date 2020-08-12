@@ -50,4 +50,32 @@ public class DatabaseStatements {
 
 		return courseArrayList;
 	}
+
+	public void displayStudentList() throws SQLException {
+		String studentHeader = String.format("%3s %20s %20s", "ID", "Name", "Address");
+		System.out.println("Students:");
+		System.out.println("-".repeat(studentHeader.length()));
+		System.out.println(studentHeader);
+		System.out.println("-".repeat(studentHeader.length()));
+
+		for (Student student : this.getStudentList()) {
+			System.out.println(String.format("%3s %20s %20s", student.getId(), student.getName(), student.getAddress()));
+		}
+
+		System.out.println("\n");
+	}
+
+	public void displayCoursesList() throws SQLException {
+		String coursesHeader = String.format("%3s %20s", "ID", "Name");
+		System.out.println("Courses:");
+		System.out.println("-".repeat(coursesHeader.length()));
+		System.out.println(coursesHeader);
+		System.out.println("-".repeat(coursesHeader.length()));
+
+		for (Course course : this.getCoursesList()) {
+			System.out.println(String.format("%3s %20s", course.getId(), course.getName()));
+		}
+
+		System.out.println("\n");
+	}
 }
