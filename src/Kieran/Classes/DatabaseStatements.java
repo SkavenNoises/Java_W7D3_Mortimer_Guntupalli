@@ -10,6 +10,10 @@ public class DatabaseStatements {
 		databaseConnection = new DatabaseConnection();
 	}
 
+	public DatabaseConnection getDatabaseConnection() {
+		return databaseConnection;
+	}
+
 	public ArrayList<Student> getStudentList() throws SQLException {
 		ArrayList<Student> studentArrayList = new ArrayList<>();
 
@@ -145,9 +149,5 @@ public class DatabaseStatements {
 		preparedStatement.close();
 
 		System.out.println("Done!");
-	}
-
-	public DatabaseConnection getDatabaseConnection() {
-		return databaseConnection;
 	}
 }
