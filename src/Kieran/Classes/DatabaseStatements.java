@@ -1,8 +1,6 @@
 package Kieran.Classes;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class DatabaseStatements {
@@ -79,7 +77,77 @@ public class DatabaseStatements {
 		System.out.println("\n");
 	}
 
-	public void closeConnection() throws SQLException {
-		this.databaseConnection.closeConnection();
+	public void insertStudent(Student student) throws SQLException {
+		System.out.println(String.format("Inserting %s into Student's Database", student.getName()));
+
+		String sql = "INSERT INTO students(name, address) VALUES (?, ?)";
+		PreparedStatement preparedStatement = this.databaseConnection.getConnection().prepareStatement(sql);
+		preparedStatement.setString(1, student.getName());
+		preparedStatement.setString(2, student.getAddress());
+
+		preparedStatement.executeUpdate();
+
+		preparedStatement.close();
+
+		System.out.println("Done!");
+	}
+
+	public void updateStudentName(int studentID, String studentName) throws SQLException {
+		System.out.println("Updating student's name...");
+
+		String sql = "UPDATE students SET name=? WHERE id=? ";
+		PreparedStatement preparedStatement = this.databaseConnection.getConnection().prepareStatement(sql);
+		preparedStatement.setString(1, studentName);
+		preparedStatement.setInt(2, studentID);
+
+		preparedStatement.executeUpdate();
+		preparedStatement.close();
+
+		System.out.println("Done!");
+	}
+
+	public void updateStudentAddress(int studentID, String studentAddress) throws SQLException {
+		System.out.println("Updating student's address");
+
+		String sql = "UPDATE students SET address=? WHERE ID=?";
+		PreparedStatement preparedStatement = databaseConnection.getConnection().prepareStatement(sql);
+		preparedStatement.setString(1, studentAddress);
+		preparedStatement.setInt(2, studentID);
+
+		preparedStatement.executeUpdate();
+		preparedStatement.close();
+
+		System.out.println("Done!");
+	}
+
+	public void deleteStudent(int studentID) throws SQLException {
+		System.out.println("Removing student...");
+
+		String sql = "DELETE FROM students WHERE id=?";
+		PreparedStatement preparedStatement = databaseConnection.getConnection().prepareStatement(sql);
+		preparedStatement.setInt(1, studentID);
+
+		preparedStatement.executeUpdate();
+		preparedStatement.close();
+
+		System.out.println("Done!");
+	}
+
+	public void insertCourse(Course course) throws SQLException {
+		System.out.println(String.format("Inserting %s into Courses' Database", course.getName()));
+
+		String sql = "INSERT INTO courses(name) VALUES (?)";
+		PreparedStatement preparedStatement = this.databaseConnection.getConnection().prepareStatement(sql);
+		preparedStatement.setString(1, course.getName());
+
+		preparedStatement.executeUpdate();
+
+		preparedStatement.close();
+
+		System.out.println("Done!");
+	}
+
+	public DatabaseConnection getDatabaseConnection() {
+		return databaseConnection;
 	}
 }

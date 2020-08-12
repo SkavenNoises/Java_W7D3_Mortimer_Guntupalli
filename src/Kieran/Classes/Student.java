@@ -5,6 +5,11 @@ public class Student {
 	private String name;
 	private String address;
 
+	public Student(String name, String address) {
+		this.name = name;
+		this.address = address;
+	}
+
 	public Student(int id, String name, String address) {
 		this.id = id;
 		this.name = name;
